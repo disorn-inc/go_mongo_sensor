@@ -38,8 +38,15 @@ func main() {
 	mongoStore := store.NewMongoDBStore(collection)
 	handler := controller.NewSensorHandler(mongoStore)
 
+	testCollection := client.Database("example").Collection("test")
+	mongoStoreTest := store.NewMongoDBStore(testCollection)
+	testHandler := controller.NewStringHandler(mongoStoreTest)
+
 	r := router.NewMyRouter()
 	r.GET("/test_sensor", handler.TestSensor)
+	r.GET("/sensor", handler.ListSensorValue)
 	r.POST("/sensor", handler.NewValue)
+	r.GET("/test_string", testHandler.ListTestValue)
+	r.POST("/test_string", testHandler.NewTestValue)
 	r.Run()
 }

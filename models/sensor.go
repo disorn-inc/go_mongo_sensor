@@ -26,4 +26,6 @@ type Sensor struct {
 	GpsArray   []Gps  `json:"gps"`
 	Distance int       `json:"distance"`
 	Time     time.Time `json:"time"`
+	CreatedAt time.Time `json:"create_at"`
+	UpdateAt time.Time	`json:"update_at"`
 }
